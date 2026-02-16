@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <title>{% block title %}CROUS{% endblock %}</title>
+        <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+        <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+        {{ importmap('app') }}
+    </head>
+
+
+
+
+    <body>
+        {% include 'partials/_header.html.twig' %}
+
+
+        <main class="page-content">
+            <div class="page-wrapper">
+                <div class="page-card">
+
+                {% for message in app.flashes('error') %}
+                    <div class="flash-message flash-error">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+
+                {% for message in app.flashes('success') %}
+                    <div class="flash-message flash-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </main>
+        
+
+        {% set totalItems = 0 %}
+        {% for item in app.session.get('panier', []) %}
+        
+            {% set totalItems = totalItems + item.quantity %}
+        {% endfor %}
+
+        
+        <a href="{{ path('panier') }}" class="cart-fab">
+    🧺
+            {% if totalItems > 0 %}
+                <span class="cart-badge">{{ totalItems }}</span>
+            {% endif %}
+        </a>
+
+        {% include 'partials/_footer.html.twig' %}
+
+    </body>
+</html>

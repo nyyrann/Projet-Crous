@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block body %}
+    <h2 class="page-title">Choisissez un produit</h2>
+
+        <div class="product-list">
+
+            <a href="{{ path('sandwich_type') }}" class="product-card">
+                <div class="product-text">
+                    <h3>Sandwich</h3>
+                    <p class="product-description">
+                        Formule étudiante campus – 1€
+                    </p>
+                    <p class="product-description">
+                        Sandwich campus + 1 laitage ou 1 fruit
+                    </p>
+                </div>
+                <div class="product-image">🥪</div>
+            </a>
+
+            <a href="{{ path('sandwich_hf_type') }}" class="product-card">
+                <div class="product-text">
+                    <h3>Sandwich Hors Formule</h3>
+                    <p class="product-description">
+                        Formule étudiante campus – 3,65€
+                    </p>
+                    <p class="product-description">
+                        Sandwich campus + 1 laitage ou 1 fruit
+                    </p>
+
+                </div>
+                <div class="product-image">🥪</div>
+            </a>
+
+            <a href="{{ path('salade_type') }}" class="product-card">
+                <div class="product-text">
+                    <h3>Salade</h3>
+                    <p class="product-description">
+                        Formule étudiante campus – 3,65€
+                    </p>
+                    <p class="product-description">
+                        Salade campus + 1 laitage ou 1 fruit
+                    </p>
+
+                </div>
+                <div class="product-image">🥗</div>
+            </a>
+
+            <a href="{{ path('salade_hf_type') }}" class="product-card">
+                <div class="product-text">
+                    <h3>Salade hors formule</h3>
+                    <p class="product-description">
+                        Formule étudiante campus – 3,65€
+                    </p>
+                    <p class="product-description">
+                        Salade campus + 1 laitage ou 1 fruit
+                    </p>
+
+
+                </div>
+                <div class="product-image">🥗</div>
+            </a>
+
+
+            <a href="{{ path('panini_type') }}" class="product-card">
+                <div class="product-text">
+                        <h3>Panini</h3>
+                        <p class="product-description">
+                            Panini Hors Formule – 3,65€
+                        </p>
+                        
+
+                    </div>
+                <div class="product-image">🥙</div>
+            </a>
+                
+
+        </div>
+
+{% endblock %}

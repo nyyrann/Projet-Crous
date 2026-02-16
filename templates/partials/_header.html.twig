@@ -1,0 +1,24 @@
+<header class="site-header">
+    <div class="header-container">
+       <a href="{{ path('app_reserve') }}" class="logo-link">
+            <div class="logo">
+                CROUS Orléans
+            </div>
+        </a>
+
+        <nav class="header-nav">
+            <div class="header-user">
+
+                <a href="{{ path('app_profile') }}" class="profile-link">
+                    👤 {{ app.user.prenom }}
+                </a>
+
+                <a href="{{ path('app_logout') }}" class="logout-link">
+                    Déconnexion
+                </a>
+
+            </div>
+
+        </nav>
+    </div>
+</header>

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Salade{% endblock %}
+
+{% block body %}
+    <h2>Choisissez votre salade</h2>
+
+        <div class="product-list">
+
+            <form method="post" action="{{ path('panier_add') }}" class="product-card">
+                <input type="hidden" name="id" value="salade_pates_jambon">
+                <input type="hidden" name="name" value="Salade de pâtes jambon">
+
+                    <div class="product-text">
+                        <h3>Salade de pâtes jambon</h3>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <button type="submit" class="add-btn" aria-label="Ajouter au panier">
+                            +
+                    </button>            
+            </form>
+
+        </div>
+{% endblock %}

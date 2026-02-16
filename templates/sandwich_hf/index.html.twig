@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sandwich Hors Formule{% endblock %}
+
+{% block body %}
+    <h2>Choisissez votre sandwich</h2>
+
+        <div class="product-list">
+
+
+            <form method="post" action="{{ path('panier_add') }}" class="product-card">
+                <input type="hidden" name="id" value="sandwich_jambon_sec">
+                <input type="hidden" name="name" value="Sandwich Jambon sec">
+
+                    <div class="product-text">
+                        <h3>Sandwich Jambon sec</h3>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <button type="submit" class="add-btn" aria-label="Ajouter au panier">
+                            +
+                    </button>            
+            </form>
+
+        </div>
+        
+        
+{% endblock %}

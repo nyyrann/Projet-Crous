@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+        <h2 class="page-title">Mon Profil</h2>
+
+        {% for message in app.flashes('success') %}
+            <div class="flash-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {{ form_start(profileForm) }}
+
+            <div class="form-group">
+                {{ form_row(profileForm.prenom) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_row(profileForm.nom) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_row(profileForm.email) }}
+            </div>
+
+            <button class="profile-btn">
+                Mettre à jour
+            </button>
+
+        {{ form_end(profileForm) }}
+
+{% endblock %}

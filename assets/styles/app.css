@@ -1,0 +1,704 @@
+/* =========================
+   BASE
+========================= */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+
+    /* compensation header + footer fixed */
+    padding-top: 60px;   /* hauteur EXACTE du header */
+    padding-bottom: 50px; /* hauteur EXACTE du footer */
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+
+    background-color: #ffffff;
+    border-bottom: 1px solid #e2e2e2;
+
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: 600;
+    color: #003366;
+    white-space: nowrap;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+}
+
+.header-nav a {
+    margin-left: 24px;
+    padding: 8px 0;
+
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+
+    color: #333;
+    position: relative;
+}
+
+.header-nav a:hover {
+    color: #0055a4;
+}
+
+.header-nav a.active {
+    color: #0055a4;
+}
+
+.header-nav a.active::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+
+    width: 100%;
+    height: 2px;
+    background-color: #0055a4;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+
+    background: #ffffff;
+    border-top: 1px solid #e0e0e0;
+
+    z-index: 1000;
+}
+
+.footer-container {
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #555;
+    font-size: 14px;
+}
+
+/* =========================
+   CONTENU CENTRAL
+========================= */
+
+.page-content {
+    display: flex;
+    justify-content: center;
+    padding: 16px 20px; /* espace léger sous la navbar */
+}
+
+.page-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.page-card {
+    width: 100%;
+    max-width: 600px;
+
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 30px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* TITRE */
+.page-title {
+    margin-top: 0;
+    margin-bottom: 24px;
+    text-align: center;
+    font-weight: 500;
+    color: #222;
+}
+
+/* =========================
+   PRODUITS
+========================= */
+
+.product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.product-card {
+    background-color: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    padding: 16px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.product-text h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #111;
+}
+
+.product-description {
+    margin: 6px 0 0 0;
+    font-size: 14px;
+    color: #555;
+}
+
+
+.product-image {
+    font-size: 36px;
+    opacity: 0.7;
+}
+
+.add-btn {
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+    border: 1px solid #d0d0d0;
+    background-color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* HOVER */
+.add-btn:hover {
+    background-color: #f5f5f5;
+    border-color: #bdbdbd;
+}
+
+/* FOCUS ACCESSIBLE */
+.add-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================
+   PANIER FLOTTANT
+========================= */
+
+.cart-fab {
+    position: fixed;
+    bottom: 70px; /* au-dessus du footer */
+    right: 20px;
+
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
+    text-decoration: none;
+    color: #333;
+
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    z-index: 2000;
+}
+
+/* BADGE */
+.cart-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+
+    background-color: #e53935;
+    color: white;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    padding: 2px 6px;
+    border-radius: 12px;
+}
+
+
+/* =========================
+   PAGE PANIER
+========================= */
+
+.panier-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.panier-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+
+/* =========================
+   PANIER ACTIONS
+========================= */
+
+.panier-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.panier-actions form {
+    margin: 0;
+}
+
+.panier-actions button {
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.panier-actions button:hover {
+    background-color: #f5f5f5;
+}
+
+.logo-link {
+    text-decoration: none;
+}
+
+.logo-link .logo {
+    color: #003366;
+}
+
+
+/* =========================
+   FLASH MESSAGE
+========================= */
+
+.flash-message {
+    width: 90%;
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.flash-error {
+    background-color: #fdecea;
+    border: 1px solid #f5c2c0;
+    color: #b42318;
+}
+
+.panier-actions button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   VALIDATION RESERVATION
+========================= */
+
+.validate-form {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.validate-btn {
+    padding: 12px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+
+    background-color: #003366;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: background-color 0.2s ease;
+}
+
+.validate-btn:hover {
+    background-color: #0055a4;
+}
+
+/* SUCCESS MESSAGE */
+.flash-success {
+    background-color: #e6f4ea;
+    border: 1px solid #b7e1c0;
+    color: #1e7d34;
+}
+
+
+
+/* =========================
+   LOGIN FULLSCREEN 
+========================= */
+
+body.auth-page {
+    margin: 0;
+    padding: 0;
+
+    height: 100vh;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #f5f7fa;
+    font-family: Arial, sans-serif;
+}
+
+/* CARD */
+.auth-container {
+    width: 100%;
+    max-width: 400px;
+
+    background: #ffffff;
+    padding: 40px;
+
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+    box-sizing: border-box;
+}
+
+/* TITRE */
+.auth-title {
+    margin: 0 0 24px 0;
+    text-align: center;
+
+    font-size: 22px;
+    font-weight: 600;
+    color: #003366;
+}
+
+/* MESSAGE ERREUR */
+.auth-error {
+    background: #fdecea;
+    color: #b42318;
+    border: 1px solid #f5c2c0;
+
+    padding: 10px 14px;
+    border-radius: 6px;
+
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+/* FORMULAIRE */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* GROUPE */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* LABEL */
+.form-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* INPUT */
+.form-group input {
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #dcdcdc;
+
+    font-size: 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* FOCUS */
+.form-group input:focus {
+    outline: none;
+    border-color: #003366;
+    box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.1);
+}
+
+/* BOUTON */
+.auth-btn {
+    margin-top: 10px;
+    padding: 12px;
+
+    border-radius: 6px;
+    border: none;
+
+    cursor: pointer;
+
+    background-color: #003366;
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* HOVER */
+.auth-btn:hover {
+    background-color: #0055a4;
+}
+
+/* ACTIVE */
+.auth-btn:active {
+    transform: scale(0.98);
+}
+
+/* LIEN BAS */
+.auth-footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.auth-footer a {
+    text-decoration: none;
+    color: #003366;
+    font-weight: 500;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+.checkbox-group {
+    margin-top: 5px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #333;
+}
+
+.checkbox-label input {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.checkbox-group ul {
+    margin-top: 4px;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    color: #b42318;
+}
+
+
+
+/* =========================
+   USER NAVBAR
+========================= */
+
+.header-user {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #003366;
+}
+
+.logout-link {
+    text-decoration: none;
+    font-size: 14px;
+    color: #555;
+    transition: color 0.2s ease;
+}
+
+.logout-link:hover {
+    color: #003366;
+}
+
+.flash-success {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #e6f4ea;
+    color: #1e7e34;
+    font-size: 14px;
+}
+
+
+/* =========================
+   PROFIL PAGE
+========================= */
+
+/* Wrapper centré */
+.page-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* Card principale */
+.page-card {
+    width: 100%;
+    max-width: 600px;
+
+    background: #ffffff;
+    padding: 35px;
+
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Titre */
+.page-title {
+    margin: 0 0 30px 0;
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+    color: #003366;
+}
+
+/* Groupe formulaire */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Labels */
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Inputs */
+.form-group input {
+    width: 100%;
+    padding: 10px 12px;
+
+    border-radius: 8px;
+    border: 1px solid #dcdcdc;
+
+    font-size: 14px;
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Focus */
+.form-group input:focus {
+    outline: none;
+    border-color: #003366;
+    box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.1);
+}
+
+/* Bouton */
+.profile-btn {
+    margin-top: 10px;
+    width: 100%;
+    padding: 12px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #003366;
+    color: white;
+
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.profile-btn:hover {
+    background-color: #0055a4;
+}
+
+.profile-btn:active {
+    transform: scale(0.98);
+}
+
+/* Flash success */
+.flash-success {
+    margin-bottom: 20px;
+    padding: 12px;
+
+    border-radius: 8px;
+
+    background-color: #e6f4ea;
+    color: #1e7e34;
+
+    font-size: 14px;
+}

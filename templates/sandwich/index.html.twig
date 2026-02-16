@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sandwich{% endblock %}
+
+{% block body %}
+    <h2>Choisissez votre sandwich</h2>
+
+        <div class="product-list">
+
+        
+
+            <form method="post" action="{{ path('panier_add') }}" class="product-card">
+                <input type="hidden" name="id" value="sandwich_poulet">
+                <input type="hidden" name="name" value="Sandwich Poulet">
+
+                    <div class="product-text">
+                        <h3>Sandwich Poulet</h3>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <button type="submit" class="add-btn" aria-label="Ajouter au panier">
+                            +
+                    </button>            
+            </form>
+
+            <form method="post" action="{{ path('panier_add') }}" class="product-card">
+                <input type="hidden" name="id" value="sandwich_fromage">
+                <input type="hidden" name="name" value="Sandwich Fromage">
+
+                    <div class="product-text">
+                        <h3>Sandwich Fromage</h3>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <button type="submit" class="add-btn" aria-label="Ajouter au panier">
+                            +
+                    </button>            
+            </form>
+
+            <form method="post" action="{{ path('panier_add') }}" class="product-card">
+                <input type="hidden" name="id" value="sandwich_thon">
+                <input type="hidden" name="name" value="Sandwich Thon">
+
+                    <div class="product-text">
+                        <h3>Sandwich Thon</h3>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <button type="submit" class="add-btn" aria-label="Ajouter au panier">
+                            +
+                    </button>            
+            </form>
+
+        </div>
+{% endblock %}
