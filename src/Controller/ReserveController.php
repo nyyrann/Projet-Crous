@@ -2,23 +2,29 @@
 
 namespace App\Controller;
 
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class ReserveController extends AbstractController
 {
-
     #[Route('/', name: 'home')]
     public function home(): Response
     {
         return $this->redirectToRoute('app_reserve');
     }
 
-    
     #[Route('/reserve', name: 'app_reserve')]
-    public function index(): Response
+    public function index(ProductRepository $productRepository): Response
     {
-        return $this->render(view: 'reserve/index.html.twig');
+        $products = $productRepository->findBy(
+            ['active' => true],
+            ['category' => 'ASC']
+        );
+
+        return $this->render('reserve/index.html.twig', [
+            'products' => $products,
+        ]);
     }
 }
