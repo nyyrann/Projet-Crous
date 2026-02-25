@@ -15,9 +15,14 @@
 
                     <div class="product-text">
                         <h3>Sandwich Poulet</h3>
-                        <span></span>
-                        <span></span>
-                    </div>
+                        <p class="product-description">
+                            Pain, émincé de poulet, tomates, salade, mayonnaise, épices kebab – 1€ / 3,65€
+                        </p>
+                        <p class="product-description">
+                            + 1 fruit ou 1 laitage
+                        </p>                    
+                    
+                        </div>
 
                     <button type="submit" class="add-btn" aria-label="Ajouter au panier">
                             +
@@ -30,8 +35,12 @@
 
                     <div class="product-text">
                         <h3>Sandwich Fromage</h3>
-                        <span></span>
-                        <span></span>
+                        <p class="product-description">
+                            Pain, emmental bio, fourme d'Ambert, fromage de chèvre et beurre – 1€ / 3,65€
+                        </p>
+                        <p class="product-description">
+                            + 1 fruit ou 1 laitage
+                        </p>
                     </div>
 
                     <button type="submit" class="add-btn" aria-label="Ajouter au panier">
@@ -45,14 +54,57 @@
 
                     <div class="product-text">
                         <h3>Sandwich Thon</h3>
-                        <span></span>
-                        <span></span>
+                        <p class="product-description">
+                            Pain, thon, tomates, salade, ciboulette, mayonnaise – 1€ / 3,65€
+                        </p>
+                        <p class="product-description">
+                            + 1 fruit ou 1 laitage
+                        </p>
                     </div>
 
                     <button type="submit" class="add-btn" aria-label="Ajouter au panier">
                             +
                     </button>            
             </form>
+
+            <form method="post" action="{{ path('panier_add') }}" class="product-card">
+                <input type="hidden" name="id" value="sandwich_houmous">
+                <input type="hidden" name="name" value="Sandwich Houmous">
+
+                    <div class="product-text">
+                        <h3>Sandwich Houmous</h3>
+                        <p class="product-description">
+                            Pain, houmous, tomates confites, salade, oignons rouge – 1€ / 3,65€
+                        </p>
+                        <p class="product-description">
+                            + 1 fruit ou 1 laitage
+                        </p>
+                    </div>
+
+                    <button type="submit" class="add-btn" aria-label="Ajouter au panier">
+                            +
+                    </button>            
+            </form>
+
+            <form method="post" action="{{ path('panier_add') }}" class="product-card">
+                <input type="hidden" name="id" value="sandwich_dinde">
+                <input type="hidden" name="name" value="Sandwich Dinde">
+
+                    <div class="product-text">
+                        <h3>Sandwich Dinde</h3>
+                        <p class="product-description">
+                            Pain, dinde, emmental, beurre – 1€ / 3,65€
+                        </p>
+                        <p class="product-description">
+                            + 1 fruit ou 1 laitage
+                        </p>
+                    </div>
+
+                    <button type="submit" class="add-btn" aria-label="Ajouter au panier">
+                            +
+                    </button>            
+            </form>
+
 
         </div>
 {% endblock %}
