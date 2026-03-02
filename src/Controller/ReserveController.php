@@ -23,7 +23,7 @@ final class ReserveController extends AbstractController
             ['category' => 'ASC']
         );
 
-        return $this->render('reserve/index.html.twig', [
+        return $this->render('reservation/index.html.twig', [
             'products' => $products,
         ]);
     }

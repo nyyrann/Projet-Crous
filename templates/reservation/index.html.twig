@@ -1,79 +1,66 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reservation{% endblock %}
+{% block title %}Réservation{% endblock %}
 
 {% block body %}
-    <h2 class="page-title">Choisissez un produit</h2>
+
+
+        <h2 class="page-title">Choisissez un produit</h2>
 
         <div class="product-list">
 
-            <a href="{{ path('sandwich_type') }}" class="product-card">
-                <div class="product-text">
-                    <h3>Sandwich</h3>
-                    <p class="product-description">
-                        Formule étudiante campus – 1€
-                    </p>
-                    <p class="product-description">
-                        Sandwich campus + 1 laitage ou 1 fruit
-                    </p>
-                </div>
-                <div class="product-image">🥪</div>
-            </a>
+            {% set currentCategory = null %}
 
-            <a href="{{ path('sandwich_hf_type') }}" class="product-card">
-                <div class="product-text">
-                    <h3>Sandwich Hors Formule</h3>
-                    <p class="product-description">
-                        Tarif étudiant campus – 3,65€
-                    </p>
-                    <p class="product-description">
-                        Sandwich campus
-                    </p>
+            {% for product in products %}
 
-                </div>
-                <div class="product-image">🥪</div>
-            </a>
+                {% if product.category != currentCategory %}
+                    <h3 class="category-title">
+                        {{ product.category }}
+                    </h3>
+                    {% set currentCategory = product.category %}
+                {% endif %}
 
-            <a href="{{ path('salade_type') }}" class="product-card">
-                <div class="product-text">
-                    <h3>Salade</h3>
-                    <p class="product-description">
-                        Formule étudiante campus – 3,65€
-                    </p>
-                    <p class="product-description">
-                        Salade campus + 1 laitage ou 1 fruit
-                    </p>
+                <form method="post"
+                      action="{{ path('panier_add') }}"
+                      class="product-card">
 
-                </div>
-                <div class="product-image">🥗</div>
-            </a>
+                    <input type="hidden"
+                           name="id"
+                           value="{{ product.id }}">
 
-            <a href="{{ path('salade_hf_type') }}" class="product-card">
-                <div class="product-text">
-                    <h3>Salade Hors Formule</h3>
-                    <p class="product-description">
-                        Tarif étudiant campus – 3,65€
-                    </p>
-                    <p class="product-description">
-                        Salade campus 
-                    </p>
+                    <div class="product-text">
 
-                </div>
-                <div class="product-image">🥗</div>
-            </a>
+                        <h4 class="product-title">
+                            {{ product.name }}
+                        </h4>
 
-
-            <a href="{{ path('panini_type') }}" class="product-card">
-                <div class="product-text">
-                        <h3>Panini Hors Formule</h3>
                         <p class="product-description">
-                            Tarif étudiant campus – 3,65€
+                            {{ product.description }}
                         </p>
+
+                        {% if product.extra %}
+                            <p class="product-extra">
+                                {{ product.extra }}
+                            </p>
+                        {% endif %}
+
+                        <p class="product-price">
+                            {{ product.price }} €
+                        </p>
+
                     </div>
-                <div class="product-image">🥙</div>
-            </a>
-                
+
+                    <button type="submit" class="add-btn">
+                        +
+                    </button>
+
+                </form>
+
+            {% else %}
+                <p>Aucun produit disponible.</p>
+            {% endfor %}
 
         </div>
+
 
 {% endblock %}
