@@ -1,33 +1,32 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Mon profil{% endblock %}
+
 {% block body %}
 
-        <h2 class="page-title">Mon Profil</h2>
+<h2 class="page-title">Mon Profil</h2>
 
-        {% for message in app.flashes('success') %}
-            <div class="flash-success">
-                {{ message }}
-            </div>
-        {% endfor %}
+<form method="post" class="profile-form">
 
-        {{ form_start(profileForm) }}
+    <div class="form-group">
+        <label>Prénom</label>
+        <input type="text" name="prenom" value="{{ app.user.prenom }}">
+    </div>
 
-            <div class="form-group">
-                {{ form_row(profileForm.prenom) }}
-            </div>
+    <div class="form-group">
+        <label>Nom</label>
+        <input type="text" name="nom" value="{{ app.user.nom }}">
+    </div>
 
-            <div class="form-group">
-                {{ form_row(profileForm.nom) }}
-            </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" value="{{ app.user.email }}">
+    </div>
 
-            <div class="form-group">
-                {{ form_row(profileForm.email) }}
-            </div>
+    <button type="submit" class="profile-btn">
+        Mettre à jour
+    </button>
 
-            <button class="profile-btn">
-                Mettre à jour
-            </button>
-
-        {{ form_end(profileForm) }}
+</form>
 
 {% endblock %}

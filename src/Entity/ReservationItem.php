@@ -16,7 +16,7 @@ class ReservationItem
     #[ORM\Column]
     private ?int $quantity = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'items')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Reservation $reservation = null;
 
@@ -37,7 +37,6 @@ class ReservationItem
     public function setQuantity(int $quantity): static
     {
         $this->quantity = $quantity;
-
         return $this;
     }
 
@@ -49,7 +48,6 @@ class ReservationItem
     public function setReservation(?Reservation $reservation): static
     {
         $this->reservation = $reservation;
-
         return $this;
     }
 
@@ -61,7 +59,6 @@ class ReservationItem
     public function setProduct(?Product $product): static
     {
         $this->product = $product;
-
         return $this;
     }
 }

@@ -1,6 +1,7 @@
 <header class="site-header">
     <div class="header-container">
-       <a href="{{ path('app_reserve') }}" class="logo-link">
+
+        <a href="{{ path('app_reserve') }}" class="logo-link">
             <div class="logo">
                 CROUS Orléans
             </div>
@@ -10,15 +11,37 @@
             <div class="header-user">
 
                 <a href="{{ path('app_profile') }}" class="profile-link">
-                    👤 {{ app.user.prenom }}
+
+                    <div class="profile-avatar">
+                        {% if app.user.photo is defined and app.user.photo %}
+                            <img src="{{ asset('uploads/profiles/' ~ app.user.photo) }}" alt="Photo">
+                        {% else %}
+                            <!-- Avatar SVG par défaut -->
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        {% endif %}
+                    </div>
+
+                    <span class="profile-name">
+                        {{ app.user.prenom }}
+                    </span>
                 </a>
 
                 <a href="{{ path('app_logout') }}" class="logout-link">
-                    Déconnexion
+
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M16 17l5-5-5-5" stroke="currentColor" stroke-width="2"/>
+                        <path d="M21 12H9" stroke="currentColor" stroke-width="2"/>
+                        <path d="M13 5V3H4v18h9v-2" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+
+                    <span>Déconnexion</span>
                 </a>
 
             </div>
-
         </nav>
+
     </div>
 </header>

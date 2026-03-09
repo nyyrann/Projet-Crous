@@ -2,15 +2,24 @@
 
 namespace App\Controller;
 
+use App\Entity\Reservation;
+use App\Entity\ReservationItem;
+use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Uid\Uuid;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+
+
+#[IsGranted('ROLE_USER')]
 final class PanierController extends AbstractController
 {
-
     #[Route('/panier', name: 'panier', methods: ['GET'])]
     public function index(SessionInterface $session): Response
     {
@@ -22,42 +31,45 @@ final class PanierController extends AbstractController
     }
 
     #[Route('/panier/add', name: 'panier_add', methods: ['POST'])]
-    public function add(Request $request, SessionInterface $session): Response
-    {
+    public function add(
+        Request $request,
+        SessionInterface $session,
+        ProductRepository $productRepository
+    ): Response {
         $id = $request->request->get('id');
-        $name = $request->request->get('name');
+        $product = $productRepository->find($id);
+
+        if (!$product) {
+            return $this->redirectToRoute('app_reserve');
+        }
 
         $panier = $session->get('panier', []);
 
-        // 🔹 Calcul total actuel
         $totalItems = 0;
         foreach ($panier as $item) {
             $totalItems += $item['quantity'];
         }
 
-        // 🔹 Bloquer si déjà 2 articles
         if ($totalItems >= 2) {
-            $this->addFlash('error', 'Vous ne pouvez réserver que 2 articles maximum.');
+            $this->addFlash('error', 'Maximum 2 articles autorisés.');
             return $this->redirectToRoute('panier');
         }
 
-        // 🔹 Sinon ajouter
         if (isset($panier[$id])) {
             $panier[$id]['quantity']++;
         } else {
             $panier[$id] = [
-                'name' => $name,
+                'id' => $product->getId(),
+                'name' => $product->getName(),
+                'price' => $product->getPrice(),
                 'quantity' => 1,
             ];
         }
 
         $session->set('panier', $panier);
-        
 
         return $this->redirectToRoute('app_reserve');
     }
-
-
 
     #[Route('/panier/remove/{id}', name: 'panier_remove', methods: ['POST'])]
     public function remove(string $id, SessionInterface $session): Response
@@ -73,10 +85,12 @@ final class PanierController extends AbstractController
         return $this->redirectToRoute('panier');
     }
 
-
     #[Route('/panier/update/{id}', name: 'panier_update', methods: ['POST'])]
-    public function update(string $id, Request $request, SessionInterface $session): Response
-    {
+    public function update(
+        string $id,
+        Request $request,
+        SessionInterface $session
+    ): Response {
         $action = $request->request->get('action');
         $panier = $session->get('panier', []);
 
@@ -84,7 +98,6 @@ final class PanierController extends AbstractController
             return $this->redirectToRoute('panier');
         }
 
-        // Calcul total actuel
         $totalItems = 0;
         foreach ($panier as $item) {
             $totalItems += $item['quantity'];
@@ -92,7 +105,6 @@ final class PanierController extends AbstractController
 
         if ($action === 'plus') {
 
-            // Bloquer si déjà 2 articles
             if ($totalItems >= 2) {
                 $this->addFlash('error', 'Maximum 2 articles autorisés.');
                 return $this->redirectToRoute('panier');
@@ -114,10 +126,14 @@ final class PanierController extends AbstractController
         return $this->redirectToRoute('panier');
     }
 
-
     #[Route('/reservation/validation', name: 'validation', methods: ['POST'])]
-    public function validateReservation(SessionInterface $session): Response
-    {
+    public function validateReservation(
+        SessionInterface $session,
+        EntityManagerInterface $em,
+        ProductRepository $productRepository,
+        Security $security
+    ): Response {
+
         $panier = $session->get('panier', []);
 
         if (empty($panier)) {
@@ -125,12 +141,52 @@ final class PanierController extends AbstractController
             return $this->redirectToRoute('panier');
         }
 
+        $user = $security->getUser();
 
-        // Vider le panier
+        if (!$user) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        // Création réservation
+        $reservation = new Reservation();
+        $reservation->setUser($user);
+        $reservation->setCreatedAt(new \DateTimeImmutable());
+        $reservation->setStatus('en_attente');
+        $reservation->setQrCode(Uuid::v4()->toRfc4122());
+
+        $em->persist($reservation);
+
+        // Création items
+        foreach ($panier as $id => $item) {
+
+            $product = $productRepository->find($id);
+
+            if (!$product) {
+                continue;
+            }
+
+            $reservationItem = new ReservationItem();
+            $reservationItem->setReservation($reservation);
+            $reservationItem->setProduct($product);
+            $reservationItem->setQuantity($item['quantity']);
+
+            $em->persist($reservationItem);
+        }
+
+        $em->flush();
+
+        // Vider panier
         $session->remove('panier');
 
-        $this->addFlash('success', 'Réservation validée avec succès !');
-
-        return $this->redirectToRoute('app_reserve');
+        return $this->redirectToRoute('reservation_show', [
+            'id' => $reservation->getId()
+        ]);
+    }
+    #[Route('/reservation/{id}', name: 'reservation_show')]
+    public function show(Reservation $reservation): Response
+    {
+        return $this->render('reservation/show.html.twig', [
+            'reservation' => $reservation
+        ]);
     }
 }

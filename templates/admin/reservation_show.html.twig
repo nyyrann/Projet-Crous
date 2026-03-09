@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Validation réservation{% endblock %}
+
+{% block body %}
+
+<h2 class="page-title">Validation réservation</h2>
+
+<div class="reservation-section">
+
+    <div class="reservation-number">
+        #{{ reservation.id }}
+    </div>
+
+    <span class="status-badge status-{{ reservation.status }}">
+        {{ reservation.status }}
+    </span>
+
+</div>
+
+<div class="reservation-section">
+
+    <h3>Produits</h3>
+
+    {% for item in reservation.items %}
+        <div class="product-item">
+            <span>{{ item.product.name }}</span>
+            <span>x {{ item.quantity }}</span>
+        </div>
+    {% endfor %}
+
+</div>
+
+{% if reservation.status != 'retiree' %}
+<form method="post"
+      action="{{ path('admin_reservation_validate', {id: reservation.id}) }}">
+
+    <button type="submit" class="validate-btn">
+        Valider le retrait
+    </button>
+
+</form>
+{% endif %}
+
+{% endblock %}

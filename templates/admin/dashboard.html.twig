@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+
+<h2 class="page-title">Réservations</h2>
+
+{% if reservations is empty %}
+    <p>Aucune réservation.</p>
+{% else %}
+
+    <div class="reservation-list">
+        {% for reservation in reservations %}
+
+            <div class="reservation-card-admin">
+
+                <div>
+                    <strong>#{{ reservation.id }}</strong>
+                    <div class="small-date">
+                        {{ reservation.createdAt|date('d/m H:i') }}
+                    </div>
+                </div>
+
+                <div>
+                    <span class="status-badge status-{{ reservation.status }}">
+                        {{ reservation.status }}
+                    </span>
+                </div>
+
+                <div>
+                    <a href="{{ path('admin_reservation_show', {id: reservation.id}) }}"
+                       class="small-btn">
+                        Voir
+                    </a>
+                </div>
+
+            </div>
+
+        {% endfor %}
+    </div>
+
+{% endif %}
+
+{% endblock %}

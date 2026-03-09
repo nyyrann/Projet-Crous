@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation #{{ reservation.id }}{% endblock %}
+
+{% block body %}
+
+<h2 class="page-title">
+    Réservation #{{ reservation.id }}
+</h2>
+
+<div class="reservation-section">
+
+    <div class="reservation-number">
+        Réservation n°{{ reservation.id }}
+    </div>
+
+    <div>
+        Client : {{ reservation.user.prenom }} {{ reservation.user.nom }}
+    </div>
+
+    <div>
+        Date : {{ reservation.createdAt|date('d/m/Y H:i') }}
+    </div>
+
+    <br>
+
+    <span class="status-badge status-{{ reservation.status }}">
+        {{ reservation.status }}
+    </span>
+
+</div>
+
+
+<div class="reservation-section">
+
+    <h3>Produits réservés</h3>
+
+    <div class="reserved-products">
+
+        {% for item in reservation.items %}
+
+            <div class="product-item">
+
+                <span>
+                    {{ item.product.name }}
+                </span>
+
+                <span>
+                    x{{ item.quantity }}
+                </span>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+<div class="reservation-section">
+
+    <h3>QR Code</h3>
+
+    <div class="qr-container">
+        <img src="{{ path('reservation_qr', {id: reservation.id}) }}" alt="QR Code">
+    </div>
+
+</div>
+
+
+{% if reservation.status != 'retiree' %}
+
+<form method="post"
+      action="{{ path('admin_reservation_validate', {id: reservation.id}) }}">
+
+    <button class="validate-btn">
+        ✔ Valider le retrait
+    </button>
+
+</form>
+
+{% endif %}
+
+
+<div class="reservation-footer">
+
+    <a href="{{ path('admin_dashboard') }}" class="back-btn">
+        Retour au dashboard
+    </a>
+
+</div>
+
+{% endblock %}

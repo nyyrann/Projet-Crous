@@ -11,6 +11,102 @@ body {
     padding-bottom: 50px;
 }
 
+
+.cart-fab {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+
+    background: #003366;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+    z-index: 2000;
+}
+
+.cart-fab:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.cart-fab svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Badge */
+.cart-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+
+    background: #ff3b30;
+    color: white;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    padding: 4px 7px;
+    border-radius: 50px;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.cart-fab {
+    background: #003366;
+    color: white;
+
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+}
+
+.cart-fab svg {
+    width: 26px;
+    height: 26px;
+}
+.cart-fab:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.cart-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+
+    background: #ff3b30;
+    color: white;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    padding: 4px 7px;
+    border-radius: 20px;
+
+    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
 /* =========================
    HEADER
 ========================= */
@@ -69,6 +165,73 @@ body {
     color: #003366;
 }
 
+.header-user {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Lien profil */
+.profile-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    text-decoration: none;
+    color: #003366;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* Avatar rond */
+.profile-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+
+    background: #f0f2f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #e0e0e0;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-avatar svg {
+    width: 18px;
+    height: 18px;
+    color: #003366;
+}
+
+/* Déconnexion */
+.logout-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    text-decoration: none;
+    font-size: 14px;
+    color: #555;
+
+    transition: color 0.2s ease;
+}
+
+.logout-link svg {
+    width: 18px;
+    height: 18px;
+}
+
+.logout-link:hover {
+    color: #003366;
+}
+
 /* =========================
    FOOTER
 ========================= */
@@ -122,80 +285,120 @@ body {
 }
 
 /* =========================
-   PRODUITS
+   PRODUCT PAGE IMPROVED
 ========================= */
 
-.category-title {
-    margin: 25px 0 10px 0;
-    font-size: 17px;
+.page-title {
+    text-align: center;
+    font-size: 26px;
     font-weight: 600;
-    color: #222;
+    color: #003366;
+    margin-bottom: 35px;
 }
 
+/* Catégorie */
+.category-title {
+    margin: 35px 0 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #003366;
+    border-left: 4px solid #003366;
+    padding-left: 10px;
+}
+
+/* Liste */
 .product-list {
     display: flex;
     flex-direction: column;
     gap: 14px;
 }
 
+/* Carte produit */
 .product-card {
-    background: #ffffff;
-    border: 1px solid #e6e6e6;
-    border-radius: 10px;
-    padding: 18px 20px;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    transition: all 0.2s ease;
+    padding: 18px 20px;
+    border-radius: 14px;
+
+    background: #ffffff;
+    border: 1px solid #ececec;
+
+    transition: all 0.25s ease;
 }
 
 .product-card:hover {
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.06);
     transform: translateY(-2px);
 }
 
+/* Bloc texte */
 .product-text {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
-.product-text h4 {
-    margin: 0 0 6px 0;
+/* Titre */
+.product-title {
     font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    color: #111;
 }
 
+/* Description */
 .product-description {
     font-size: 14px;
-    color: #555;
-    margin-bottom: 4px;
+    color: #666;
+    margin: 0;
 }
 
+/* Extra */
 .product-extra {
-    font-size: 14px;
-    font-weight: 500;
-    color: #333;
-    margin-bottom: 6px;
+    font-size: 13px;
+    color: #888;
+    margin: 0;
 }
 
+/* Prix */
 .product-price {
+    font-size: 14px;
     font-weight: 600;
+    color: #003366;
+    margin-top: 6px;
 }
 
 /* Bouton + */
 .add-btn {
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
+
     border-radius: 50%;
-    border: 1px solid #dcdcdc;
-    background: #ffffff;
+    border: none;
+
+    background: #003366;
+    color: white;
+
     font-size: 20px;
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .add-btn:hover {
-    background: #f3f3f3;
+    background: #0055a4;
+    transform: scale(1.05);
+}
+
+.add-btn:active {
+    transform: scale(0.95);
 }
 
 /* =========================
@@ -206,31 +409,104 @@ body {
     position: fixed;
     bottom: 70px;
     right: 20px;
-    width: 56px;
-    height: 56px;
+
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
+
+    background: #003366;
+    color: white;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+
+    text-decoration: none;
+
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+    z-index: 2000;
+}
+
+.cart-fab svg {
+    width: 26px;
+    height: 26px;
+}
+
+.cart-fab:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
 }
 
 .cart-badge {
     position: absolute;
     top: -6px;
     right: -6px;
-    background: #e53935;
+
+    background: #ff3b30;
     color: white;
+
     font-size: 12px;
-    padding: 2px 6px;
-    border-radius: 12px;
+    font-weight: 600;
+
+    padding: 4px 7px;
+    border-radius: 20px;
+
+    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
+
+.empty-cart {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.empty-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    opacity: 0.6;
+}
+
+.empty-text {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.empty-btn {
+    display: inline-block;
+    padding: 10px 18px;
+
+    background-color: #003366;
+    color: white;
+    text-decoration: none;
+
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: background-color 0.2s ease;
+}
+
+.empty-btn:hover {
+    background-color: #0055a4;
+}
+
+.empty-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px auto;
+    color: #003366;
+    opacity: 0.5;
+}
+
+.empty-icon svg {
+    width: 100%;
+    height: 100%;
 }
 
 /* =========================
-   FORM (login / register / profil)
+   FORM LOGIN / REGISTER
 ========================= */
 
 .form-group {
@@ -453,4 +729,415 @@ body.auth-page {
 
     border-radius: 8px;
     font-size: 14px;
+}
+
+/* =========================
+   PANIER LIST
+========================= */
+
+.panier-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.panier-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    border-bottom: 1px solid #ececec;
+}
+
+/* INFO */
+.panier-info strong {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111;
+}
+
+.panier-info {
+    font-size: 14px;
+    color: #555;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+
+.panier-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Boutons rond minimalistes */
+.panier-actions button {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid #dcdcdc;
+    background: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.2s ease;
+}
+
+.panier-actions button:hover {
+    background-color: #003366;
+    color: #ffffff;
+    border-color: #003366;
+    transform: scale(1.08);
+}
+
+/* Supprimer différent */
+.panier-actions .delete-btn {
+    border-radius: 8px;
+    width: auto;
+    padding: 6px 12px;
+    font-size: 13px;
+}
+
+/* Quantité */
+.quantity-display {
+    min-width: 20px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+/* =========================
+   TOTAL STICKY
+========================= */
+
+.panier-footer {
+    position: sticky;
+    bottom: 0;
+    background: #ffffff;
+    padding-top: 15px;
+    margin-top: 25px;
+    border-top: 1px solid #eaeaea;
+}
+
+/* Total */
+.panier-total {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+/* =========================
+   VALIDATION BUTTON
+========================= */
+
+.validate-btn {
+    width: 100%;
+    padding: 14px;
+
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+
+    background-color: #003366;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    transition: all 0.2s ease;
+}
+
+.validate-btn:hover {
+    background-color: #0055a4;
+    transform: translateY(-2px);
+}
+
+.validate-btn:active {
+    transform: scale(0.97);
+}
+
+
+/* =========================
+   RESERVATION CONFIRMATION
+========================= */
+
+.reservation-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.reservation-card {
+    width: 100%;
+    max-width: 650px;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    animation: fadeInUp 0.4s ease;
+}
+
+.reservation-title {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 600;
+    color: #003366;
+    margin-bottom: 30px;
+}
+
+.reservation-section {
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    border: 1px solid #ececec;
+}
+
+.reservation-section h3 {
+    margin: 0 0 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.reservation-number {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    background: #fff3cd;
+    color: #856404;
+}
+
+.qr-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.qr-container img,
+.qr-container svg {
+    width: 220px;
+    height: 220px;
+}
+
+.reservation-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    background-color: #003366;
+    color: white;
+    font-size: 14px;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.back-btn:hover {
+    background-color: #0055a4;
+}
+
+.back-btn:active {
+    transform: scale(0.98);
+}
+
+/* animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Badge dynamique */
+.status-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.status-en_attente {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-retiree {
+    background: #e6f4ea;
+    color: #1e7e34;
+}
+
+.status-annulee {
+    background: #fdecea;
+    color: #b42318;
+}
+
+/* QR animation */
+.qr-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin-top: 15px;
+    transition: transform 0.3s ease;
+}
+
+.qr-container img,
+.qr-container svg {
+    width: 220px;
+    height: 220px;
+    border-radius: 12px;
+    padding: 15px;
+    background: white;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.qr-container img:hover,
+.qr-container svg:hover {
+    transform: scale(1.05);
+}
+
+/* Produits réservés */
+.reserved-products {
+    margin-top: 25px;
+}
+
+.reserved-products h4 {
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.product-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #ececec;
+    font-size: 14px;
+}
+
+.product-item:last-child {
+    border-bottom: none;
+}
+
+/* =========================
+   PROFILE PAGE
+========================= */
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-btn {
+    margin-top: 10px;
+    padding: 14px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #003366;
+    color: white;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.profile-btn:hover {
+    background: #0055a4;
+    transform: translateY(-2px);
+}
+
+.profile-btn:active {
+    transform: scale(0.97);
+}
+
+/* ADMIN DASHBOARD */
+
+.admin-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.admin-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #ececec;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.admin-info {
+    font-size: 14px;
+    color: #555;
+}
+
+.reservation-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.reservation-card-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid #ececec;
+}
+
+.small-date {
+    font-size: 12px;
+    color: #888;
+}
+
+.small-btn {
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: #003366;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
 }
