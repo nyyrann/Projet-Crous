@@ -63,13 +63,15 @@
     <h3>QR Code</h3>
 
     <div class="qr-container">
-        <img src="{{ path('reservation_qr', {id: reservation.id}) }}" alt="QR Code">
+        {# <img src="{{ path('reservation_qr', {id: reservation.id}) }}" alt="QR Code"> #}
+        {# <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={{ reservation.qrCode }}"> #}
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://192.168.1.25:8000/admin/scan/{{ reservation.qrCode }}">
     </div>
 
 </div>
 
 
-{% if reservation.status != 'retiree' %}
+{# {% if reservation.status != 'retiree' %}
 
 <form method="post"
       action="{{ path('admin_reservation_validate', {id: reservation.id}) }}">
@@ -89,6 +91,6 @@
         Retour au dashboard
     </a>
 
-</div>
+</div> #}
 
 {% endblock %}

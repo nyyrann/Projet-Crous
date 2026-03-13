@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement{% endblock %}
+
+{% block body %}
+
+<div class="payment-container">
+
+    <h2>Paiement sécurisé</h2>
+
+    <div class="card-logos">
+
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Visa_Inc._logo_%282005%E2%80%932014%29.svg" alt="Visa">
+
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
+
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
+
+        </div>
+
+    <div class="payment-total">
+        Total à payer : <strong>{{ total }} €</strong>
+    </div>
+
+    <form method="post" action="{{ path('app_payment_success') }}" class="payment-form">
+
+        <div class="form-group">
+            <label>Nom sur la carte</label>
+            <input type="text" placeholder="John Doe" required>
+        </div>
+
+        <div class="form-group">
+            <label>Numéro de carte</label>
+            <input type="text" placeholder="1234 5678 9012 3456" required>
+        </div>
+
+        <div class="form-row">
+
+            <div class="form-group">
+                <label>Date d'expiration</label>
+                <input type="text" placeholder="MM/YY" required>
+            </div>
+
+            <div class="form-group">
+                <label>CVV</label>
+                <input type="text" placeholder="123" required>
+            </div>
+
+        </div>
+
+        <button class="pay-btn">
+            Confirmer le paiement
+        </button>
+
+    </form>
+
+</div>
+
+
+
+{% endblock %}

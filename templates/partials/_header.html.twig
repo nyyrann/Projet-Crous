@@ -1,10 +1,18 @@
 <header class="site-header">
     <div class="header-container">
 
-        <a href="{{ path('app_reserve') }}" class="logo-link">
+        <a href="
+        {% if is_granted('ROLE_EMPLOYEE') %}
+            {{ path('admin_dashboard') }}
+        {% else %}
+            {{ path('app_reserve') }}
+        {% endif %}
+        " class="logo-link">
+
             <div class="logo">
                 CROUS Orléans
             </div>
+
         </a>
 
         <nav class="header-nav">
@@ -16,7 +24,6 @@
                         {% if app.user.photo is defined and app.user.photo %}
                             <img src="{{ asset('uploads/profiles/' ~ app.user.photo) }}" alt="Photo">
                         {% else %}
-                            <!-- Avatar SVG par défaut -->
                             <svg viewBox="0 0 24 24" fill="none">
                                 <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
                                 <path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="2"/>
@@ -38,6 +45,7 @@
                     </svg>
 
                     <span>Déconnexion</span>
+
                 </a>
 
             </div>

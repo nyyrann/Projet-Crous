@@ -4,102 +4,104 @@
 
 {% block body %}
 
-    <h2 class="page-title">Mon panier</h2>
+<h2 class="page-title">Mon panier</h2>
 
-    {# Flash messages #}
-    {% for message in app.flashes('error') %}
-        <div class="flash-error">
-            {{ message }}
-        </div>
-    {% endfor %}
+{# Flash messages #}
+{% for message in app.flashes('error') %}
+    <div class="flash-error">
+        {{ message }}
+    </div>
+{% endfor %}
 
-    {% for message in app.flashes('success') %}
-        <div class="flash-success">
-            {{ message }}
-        </div>
-    {% endfor %}
+{% for message in app.flashes('success') %}
+    <div class="flash-success">
+        {{ message }}
+    </div>
+{% endfor %}
 
-    {% if panier is empty %}
+{% if panier is empty %}
 
-        <div class="empty-cart">
-            <div class="empty-icon">
-                <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M3 3h2l2 12h11l2-9H6" 
-                        stroke="currentColor" 
-                        stroke-width="1.6" 
-                        stroke-linecap="round" 
-                        stroke-linejoin="round"/>
-                    <circle cx="9" cy="20" r="1.5" fill="currentColor"/>
-                    <circle cx="18" cy="20" r="1.5" fill="currentColor"/>
-                </svg>
-            </div>
+<div class="empty-cart">
 
-            <p class="empty-text">Votre panier est vide.</p>
+    <div class="empty-icon">
+        <svg viewBox="0 0 24 24" fill="none">
+            <path d="M3 3h2l2 12h11l2-9H6"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"/>
+            <circle cx="9" cy="20" r="1.5" fill="currentColor"/>
+            <circle cx="18" cy="20" r="1.5" fill="currentColor"/>
+        </svg>
+    </div>
 
-            <a href="{{ path('app_reserve') }}" class="empty-btn">
-                Voir les produits
-            </a>
-        </div>
+    <p class="empty-text">Votre panier est vide.</p>
 
-    {% else %}
+    <a href="{{ path('app_reserve') }}" class="empty-btn">
+        Voir les produits
+    </a>
 
-    <ul class="panier-list">
+</div>
 
-        {% set total = 0 %}
+{% else %}
 
-        {% for item in panier %}
+<ul class="panier-list">
 
-            {% set lineTotal = item.price * item.quantity %}
-            {% set total = total + lineTotal %}
+{% set total = 0 %}
 
-            <li class="panier-item">
+{% for item in panier %}
 
-                <div class="panier-info">
-                    <strong>{{ item.name }}</strong><br>
-                    {{ item.price }} € x {{ item.quantity }}
-                </div>
+{% set lineTotal = item.price * item.quantity %}
+{% set total = total + lineTotal %}
 
-                <div class="panier-actions">
+<li class="panier-item">
 
-                    <form method="post" action="{{ path('panier_update', {id: item.id}) }}">
-                        <input type="hidden" name="action" value="minus">
-                        <button type="submit">−</button>
-                    </form>
+    <div class="panier-info">
+        <strong>{{ item.name }}</strong><br>
+        {{ item.price }} € x {{ item.quantity }}
+    </div>
 
-                    <span class="quantity-display">
-                        {{ item.quantity }}
-                    </span>
+    <div class="panier-actions">
 
-                    <form method="post" action="{{ path('panier_update', {id: item.id}) }}">
-                        <input type="hidden" name="action" value="plus">
-                        <button type="submit">+</button>
-                    </form>
+        <form method="post" action="{{ path('panier_update', {id: item.id}) }}">
+            <input type="hidden" name="action" value="minus">
+            <button type="submit">−</button>
+        </form>
 
-                    <form method="post" action="{{ path('panier_remove', {id: item.id}) }}">
-                        <button type="submit" class="delete-btn">Supprimer</button>                    
-                    </form>
+        <span class="quantity-display">
+            {{ item.quantity }}
+        </span>
 
-                </div>
+        <form method="post" action="{{ path('panier_update', {id: item.id}) }}">
+            <input type="hidden" name="action" value="plus">
+            <button type="submit">+</button>
+        </form>
 
-            </li>
-
-        {% endfor %}
-
-    </ul>
-
-    <div class="panier-footer">
-
-        <div class="panier-total">
-            Total : {{ total }} €
-        </div>
-
-        <form method="post" action="{{ path('validation') }}">
-            <button type="submit" class="validate-btn">
-                Valider la réservation
+        <form method="post" action="{{ path('panier_remove', {id: item.id}) }}">
+            <button type="submit" class="delete-btn">
+                Supprimer
             </button>
         </form>
 
     </div>
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+<div class="panier-footer">
+
+    <div class="panier-total">
+        Total : {{ total }} €
+    </div>
+
+    <a href="{{ path('app_payment') }}" class="validate-btn">
+        Payer
+    </a>
+
+</div>
 
 {% endif %}
 

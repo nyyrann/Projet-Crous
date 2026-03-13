@@ -14,7 +14,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 
 
 
-#[IsGranted('ROLE_USER')]
+// #[IsGranted('ROLE_USER')]
 class ReserveController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
@@ -38,6 +38,7 @@ class ReserveController extends AbstractController
     }
 
     #[Route('/reserve', name: 'app_reserve')]
+    #[IsGranted('ROLE_USER')]
     public function index(ProductRepository $productRepository): Response
     {
         $products = $productRepository->findBy(['active' => true]);

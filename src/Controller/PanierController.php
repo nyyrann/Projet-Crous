@@ -15,8 +15,6 @@ use Symfony\Component\Uid\Uuid;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-
-
 #[IsGranted('ROLE_USER')]
 final class PanierController extends AbstractController
 {
@@ -36,6 +34,7 @@ final class PanierController extends AbstractController
         SessionInterface $session,
         ProductRepository $productRepository
     ): Response {
+
         $id = $request->request->get('id');
         $product = $productRepository->find($id);
 
@@ -91,6 +90,7 @@ final class PanierController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
+
         $action = $request->request->get('action');
         $panier = $session->get('panier', []);
 
@@ -126,8 +126,31 @@ final class PanierController extends AbstractController
         return $this->redirectToRoute('panier');
     }
 
-    #[Route('/reservation/validation', name: 'validation', methods: ['POST'])]
-    public function validateReservation(
+    #[Route('/payment', name: 'app_payment', methods:['GET','POST'])]
+    public function payment(SessionInterface $session): Response
+    {
+        $panier = $session->get('panier', []);
+
+        if (empty($panier)) {
+            $this->addFlash('error', 'Votre panier est vide.');
+            return $this->redirectToRoute('panier');
+        }
+
+        $total = 0;
+
+        foreach ($panier as $item) {
+            $total += $item['price'] * $item['quantity'];
+        }
+
+        return $this->render('payment/index.html.twig', [
+            'panier' => $panier,
+            'total' => $total
+        ]);
+
+    }
+
+    #[Route('/payment/success', name: 'app_payment_success', methods:['POST'])]
+    public function paymentSuccess(
         SessionInterface $session,
         EntityManagerInterface $em,
         ProductRepository $productRepository,
@@ -137,7 +160,6 @@ final class PanierController extends AbstractController
         $panier = $session->get('panier', []);
 
         if (empty($panier)) {
-            $this->addFlash('error', 'Votre panier est vide.');
             return $this->redirectToRoute('panier');
         }
 
@@ -147,16 +169,14 @@ final class PanierController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        // Création réservation
         $reservation = new Reservation();
         $reservation->setUser($user);
         $reservation->setCreatedAt(new \DateTimeImmutable());
-        $reservation->setStatus('en_attente');
+        $reservation->setStatus('payee');
         $reservation->setQrCode(Uuid::v4()->toRfc4122());
 
         $em->persist($reservation);
 
-        // Création items
         foreach ($panier as $id => $item) {
 
             $product = $productRepository->find($id);
@@ -175,13 +195,15 @@ final class PanierController extends AbstractController
 
         $em->flush();
 
-        // Vider panier
         $session->remove('panier');
+
+        $this->addFlash('success', 'Paiement effectué avec succès !');
 
         return $this->redirectToRoute('reservation_show', [
             'id' => $reservation->getId()
         ]);
     }
+
     #[Route('/reservation/{id}', name: 'reservation_show')]
     public function show(Reservation $reservation): Response
     {

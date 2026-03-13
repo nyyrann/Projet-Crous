@@ -57,4 +57,32 @@ class EmployeeController extends AbstractController
             'id' => $reservation->getId()
         ]);
     }
+
+    #[Route('/scan', name: 'admin_scan')]
+    #[IsGranted('ROLE_EMPLOYEE')]
+    public function scan(): Response
+    {
+        return $this->render('employee/scan.html.twig');
+    }
+
+
+    #[Route('/validateqr/{code}', name: 'admin_validate')]
+    #[IsGranted('ROLE_EMPLOYEE')]
+    public function validateQr(string $code, EntityManagerInterface $em, ReservationRepository $repo): Response
+    {
+        $reservation = $repo->findOneBy(['qrCode' => $code]);
+
+        if (!$reservation) {
+            return $this->json([
+                'message' => 'Réservation introuvable'
+            ]);
+        }
+
+        $reservation->setStatus('retire');
+        $em->flush();
+
+        return $this->json([
+            'message' => 'Réservation validée'
+        ]);
+    }
 }
